@@ -1,3 +1,5 @@
+//File Path: frontend/src/Context/ShopContext.jsx
+
 import React, { createContext, useEffect, useState } from "react";
 
 export const ShopContext = createContext(null);
@@ -37,22 +39,23 @@ const ShopContextProvider = (props) => {
     }, []);
 
     const addToCart = (itemId) => {
-        setCartItems(prev => ({ ...prev, [itemId]: prev[itemId] + 1 }));
-        if (localStorage.getItem('auth-token')) {
-            fetch('http://localhost:4000/addtocart', {
-                method: 'POST',
-                headers: {
-                    'Accept': 'application/json',
-                    'auth-token': `${localStorage.getItem('auth-token')}`,
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ "itemId": itemId }),
-            })
-                .then(response => response.json())
-                .then(data => console.log(data))
-                .catch(error => console.error('Error adding to cart:', error));
-        }
+    setCartItems(prev => ({ ...prev, [itemId]: prev[itemId] + 1 }));
+    if (localStorage.getItem('auth-token')) {
+        fetch('http://localhost:4000/addtocart', {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'auth-token': `${localStorage.getItem('auth-token')}`,
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ "itemId": String(itemId) }), // Ensure itemId is a string
+        })
+        .then(response => response.json())
+        .then(data => console.log(data))
+        .catch(error => console.error('Error adding to cart:', error));
     }
+};
+
 
     const removeFromCart = (itemId) => {
         setCartItems(prev => ({ ...prev, [itemId]: Math.max(prev[itemId] - 1, 0) }));

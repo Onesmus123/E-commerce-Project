@@ -1,3 +1,5 @@
+//File Path: frontend/src/Components/Navbar/Navbar.jsx
+
 import React, { useContext,useRef, useState } from 'react'
 import './Navbar.css'
 

@@ -1,3 +1,5 @@
+//File Path: frontend/src/Components/CartItems/CartItems.jsx
+
 import React, { useContext } from 'react'
 import './CartItems.css'
 import { ShopContext } from '../../Context/ShopContext'
